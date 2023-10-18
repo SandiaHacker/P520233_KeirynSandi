@@ -51,5 +51,15 @@ namespace P520233_KeirynSandi.Formularios
         {
             TxtContrania.UseSystemPasswordChar=true;
         }
+
+        private void BtnIngresar_Click(object sender, EventArgs e)
+        {
+
+            Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
+            this.Hide();
+
+
+
+        }
     }
 }

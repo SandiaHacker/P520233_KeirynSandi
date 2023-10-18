@@ -53,7 +53,7 @@ namespace Logica.Models
         //COMPOSICIONES 
 
         public MovimientoTipo MiTipo { get; set; }
-        public Usuario Usuario { get; set; }
+        public Usuario MiUsuario { get; set; }
 
         //En el caso del detalle, si analizamos el  diagrama de clases 
         //Vemos que al llegar a la clase de detalles termina en "muchos"
