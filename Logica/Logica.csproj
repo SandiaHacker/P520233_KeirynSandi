@@ -52,6 +52,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioRoll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Crypto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

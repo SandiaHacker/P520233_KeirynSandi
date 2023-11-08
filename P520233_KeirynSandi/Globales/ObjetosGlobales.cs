@@ -15,6 +15,11 @@ namespace P520233_KeirynSandi.Globales
 
         public static Formularios.FrmUsuariosGestion MiFormularioDeGestionDeUsuarios = new Formularios.FrmUsuariosGestion();
 
+        //ESTE SERA EL USUARIO VALIDADO EN EL LOGIN, TENDRA UN SCORE GLOBAL 
+        //EN TODA LA APP
+
+        public static Logica.Models.Usuario MiUsuarioGlobal = new Logica.Models.Usuario();
+
 
 
 

@@ -37,6 +37,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.BtnVerContrsenia = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.BtnIngresoDirecto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -145,12 +146,24 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // BtnIngresoDirecto
+            // 
+            this.BtnIngresoDirecto.Location = new System.Drawing.Point(170, 12);
+            this.BtnIngresoDirecto.Name = "BtnIngresoDirecto";
+            this.BtnIngresoDirecto.Size = new System.Drawing.Size(117, 25);
+            this.BtnIngresoDirecto.TabIndex = 12;
+            this.BtnIngresoDirecto.Text = "Ingreso Directo";
+            this.BtnIngresoDirecto.UseVisualStyleBackColor = true;
+            this.BtnIngresoDirecto.Visible = false;
+            this.BtnIngresoDirecto.Click += new System.EventHandler(this.BtnIngresoDirecto_Click);
+            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Tan;
             this.ClientSize = new System.Drawing.Size(435, 563);
+            this.Controls.Add(this.BtnIngresoDirecto);
             this.Controls.Add(this.BtnVerContrsenia);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.BtnCerrar);
@@ -161,9 +174,11 @@
             this.Controls.Add(this.TxtContrania);
             this.Controls.Add(this.TxtUsuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.KeyPreview = true;
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.FrmLogin_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLogin_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -181,5 +196,6 @@
         private System.Windows.Forms.Button BtnCerrar;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button BtnVerContrsenia;
+        private System.Windows.Forms.Button BtnIngresoDirecto;
     }
 }

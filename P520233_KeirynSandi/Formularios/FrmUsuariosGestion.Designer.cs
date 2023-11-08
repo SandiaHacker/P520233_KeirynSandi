@@ -39,6 +39,13 @@
             this.ColTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.CbUsuarioActivo = new System.Windows.Forms.CheckBox();
             this.TxtUsuarioDireccion = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -62,13 +69,6 @@
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnLimpiar = new System.Windows.Forms.Button();
             this.BtnCerrar = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgListaUsuario)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +88,7 @@
             this.TxtBuscar.Name = "TxtBuscar";
             this.TxtBuscar.Size = new System.Drawing.Size(238, 22);
             this.TxtBuscar.TabIndex = 1;
+            this.TxtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
             // 
             // CbVerActivos
             // 
@@ -100,6 +101,7 @@
             this.CbVerActivos.TabIndex = 2;
             this.CbVerActivos.Text = "Ver Usuarios Activos";
             this.CbVerActivos.UseVisualStyleBackColor = true;
+            this.CbVerActivos.CheckedChanged += new System.EventHandler(this.CbVerActivos_CheckedChanged);
             // 
             // DgListaUsuario
             // 
@@ -125,6 +127,9 @@
             this.DgListaUsuario.Size = new System.Drawing.Size(1077, 346);
             this.DgListaUsuario.TabIndex = 3;
             this.DgListaUsuario.VirtualMode = true;
+            this.DgListaUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgListaUsuario_CellClick);
+            this.DgListaUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgListaUsuario_CellContentClick);
+            this.DgListaUsuario.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgListaUsuario_DataBindingComplete);
             // 
             // ColUsuarioID
             // 
@@ -216,6 +221,81 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalles del Usuario";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(897, 279);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(147, 16);
+            this.label16.TabIndex = 27;
+            this.label16.Text = "DATOS REQUERIDOS";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(873, 280);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(18, 18);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "*";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(1083, 65);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(18, 18);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "*";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Red;
+            this.label13.Location = new System.Drawing.Point(1083, 11);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(18, 18);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "*";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(383, 195);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(18, 18);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "*";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(350, 136);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(18, 18);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "*";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(350, 67);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(18, 18);
+            this.label10.TabIndex = 18;
+            this.label10.Text = "*";
+            // 
             // CbUsuarioActivo
             // 
             this.CbUsuarioActivo.AutoSize = true;
@@ -235,6 +315,7 @@
             this.TxtUsuarioDireccion.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TxtUsuarioDireccion.Size = new System.Drawing.Size(338, 133);
             this.TxtUsuarioDireccion.TabIndex = 16;
+            this.TxtUsuarioDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUsuarioDireccion_KeyPress);
             // 
             // label9
             // 
@@ -251,6 +332,7 @@
             this.TxtUsuarioTelefono.Name = "TxtUsuarioTelefono";
             this.TxtUsuarioTelefono.Size = new System.Drawing.Size(357, 22);
             this.TxtUsuarioTelefono.TabIndex = 14;
+            this.TxtUsuarioTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUsuarioTelefono_KeyPress);
             // 
             // label8
             // 
@@ -287,6 +369,7 @@
             this.TxtUsuarioContrasenia.Name = "TxtUsuarioContrasenia";
             this.TxtUsuarioContrasenia.Size = new System.Drawing.Size(266, 22);
             this.TxtUsuarioContrasenia.TabIndex = 10;
+            this.TxtUsuarioContrasenia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUsuarioContrasenia_KeyPress);
             // 
             // CboxUsuarioTipoRol
             // 
@@ -312,6 +395,7 @@
             this.TxtUsuarioCorreo.Name = "TxtUsuarioCorreo";
             this.TxtUsuarioCorreo.Size = new System.Drawing.Size(357, 22);
             this.TxtUsuarioCorreo.TabIndex = 7;
+            this.TxtUsuarioCorreo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUsuarioCorreo_KeyPress);
             // 
             // label5
             // 
@@ -328,6 +412,7 @@
             this.TxtUsuarioNombre.Name = "TxtUsuarioNombre";
             this.TxtUsuarioNombre.Size = new System.Drawing.Size(357, 22);
             this.TxtUsuarioNombre.TabIndex = 5;
+            this.TxtUsuarioNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUsuarioNombre_KeyPress);
             // 
             // label4
             // 
@@ -344,6 +429,7 @@
             this.TxtUsuarioCedula.Name = "TxtUsuarioCedula";
             this.TxtUsuarioCedula.Size = new System.Drawing.Size(357, 22);
             this.TxtUsuarioCedula.TabIndex = 3;
+            this.TxtUsuarioCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUsuarioCedula_KeyPress);
             // 
             // label3
             // 
@@ -395,6 +481,7 @@
             this.BtnModificarUsuario.TabIndex = 19;
             this.BtnModificarUsuario.Text = "MODIFICAR";
             this.BtnModificarUsuario.UseVisualStyleBackColor = false;
+            this.BtnModificarUsuario.Click += new System.EventHandler(this.BtnModificarUsuario_Click);
             // 
             // BtnEliminar
             // 
@@ -407,6 +494,7 @@
             this.BtnEliminar.TabIndex = 20;
             this.BtnEliminar.Text = "ELIMINAR";
             this.BtnEliminar.UseVisualStyleBackColor = false;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // BtnLimpiar
             // 
@@ -419,6 +507,7 @@
             this.BtnLimpiar.TabIndex = 21;
             this.BtnLimpiar.Text = "LIMPIAR";
             this.BtnLimpiar.UseVisualStyleBackColor = false;
+            this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
             // BtnCerrar
             // 
@@ -431,82 +520,7 @@
             this.BtnCerrar.TabIndex = 22;
             this.BtnCerrar.Text = "CERRAR";
             this.BtnCerrar.UseVisualStyleBackColor = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(350, 67);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(18, 18);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "*";
-        
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(350, 136);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(18, 18);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "*";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(383, 195);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(18, 18);
-            this.label12.TabIndex = 20;
-            this.label12.Text = "*";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(1083, 11);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(18, 18);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "*";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(1083, 65);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(18, 18);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "*";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("MS Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(873, 280);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(18, 18);
-            this.label15.TabIndex = 26;
-            this.label15.Text = "*";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(897, 279);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(147, 16);
-            this.label16.TabIndex = 27;
-            this.label16.Text = "DATOS REQUERIDOS";
+            this.BtnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click);
             // 
             // FrmUsuariosGestion
             // 

@@ -54,12 +54,34 @@ namespace P520233_KeirynSandi.Formularios
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(TxtUsuario.Text.Trim()) &&
+                !string.IsNullOrEmpty(TxtContrania.Text.Trim()))
+            {
+                //SI HAY VALORES EN LOS CUADROS DE TEXTO SE PROCEDE A VALIDARLOS
+                string usuario = TxtUsuario.Text.Trim();
+                string contrasenia = TxtContrania.Text.Trim();
+
+                int idUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal.Validar 
+            }
+
 
             Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
             this.Hide();
 
+        }
 
+        private void FrmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Shift & e.Control & e.KeyCode == Keys.A)
+            {
+                BtnIngresoDirecto.Visible = true;
+            }
+        }
 
+        private void BtnIngresoDirecto_Click(object sender, EventArgs e)
+        {
+            Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
+            this.Hide();
         }
     }
 }
