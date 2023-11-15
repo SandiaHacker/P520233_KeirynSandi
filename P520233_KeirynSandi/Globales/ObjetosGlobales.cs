@@ -20,10 +20,12 @@ namespace P520233_KeirynSandi.Globales
 
         public static Logica.Models.Usuario MiUsuarioGlobal = new Logica.Models.Usuario();
 
+        //FORMULARIO DE MOVIMIENTOS DE PRODUCTOS
+        public static Formularios.FrmMovimientosInventario
+            MiFormularioMovimientos = new Formularios.FrmMovimientosInventario();
 
 
-
-
+        
 
     }
 }

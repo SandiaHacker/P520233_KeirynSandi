@@ -30,11 +30,11 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mANTENIMIENTOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gestiónDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuGestionUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.gestiónDeProductosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuGestionProductos = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.gestiónDeCategoríasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuGestionCategorias = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.pROCESOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradasYSalidasDeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +53,10 @@
             this.aCERCADEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -75,44 +78,44 @@
             // mANTENIMIENTOSToolStripMenuItem
             // 
             this.mANTENIMIENTOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gestiónDeUsuariosToolStripMenuItem,
+            this.MnuGestionUsuarios,
             this.toolStripSeparator1,
-            this.gestiónDeProductosToolStripMenuItem,
+            this.MnuGestionProductos,
             this.toolStripSeparator2,
-            this.gestiónDeCategoríasToolStripMenuItem,
+            this.MnuGestionCategorias,
             this.toolStripSeparator3});
             this.mANTENIMIENTOSToolStripMenuItem.Name = "mANTENIMIENTOSToolStripMenuItem";
             this.mANTENIMIENTOSToolStripMenuItem.Size = new System.Drawing.Size(150, 24);
             this.mANTENIMIENTOSToolStripMenuItem.Text = "MANTENIMIENTOS";
             // 
-            // gestiónDeUsuariosToolStripMenuItem
+            // MnuGestionUsuarios
             // 
-            this.gestiónDeUsuariosToolStripMenuItem.Name = "gestiónDeUsuariosToolStripMenuItem";
-            this.gestiónDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
-            this.gestiónDeUsuariosToolStripMenuItem.Text = "Gestión de Usuarios";
-            this.gestiónDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.gestiónDeUsuariosToolStripMenuItem_Click);
+            this.MnuGestionUsuarios.Name = "MnuGestionUsuarios";
+            this.MnuGestionUsuarios.Size = new System.Drawing.Size(238, 26);
+            this.MnuGestionUsuarios.Text = "Gestión de Usuarios";
+            this.MnuGestionUsuarios.Click += new System.EventHandler(this.gestiónDeUsuariosToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(235, 6);
             // 
-            // gestiónDeProductosToolStripMenuItem
+            // MnuGestionProductos
             // 
-            this.gestiónDeProductosToolStripMenuItem.Name = "gestiónDeProductosToolStripMenuItem";
-            this.gestiónDeProductosToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
-            this.gestiónDeProductosToolStripMenuItem.Text = "Gestión de Productos";
+            this.MnuGestionProductos.Name = "MnuGestionProductos";
+            this.MnuGestionProductos.Size = new System.Drawing.Size(238, 26);
+            this.MnuGestionProductos.Text = "Gestión de Productos";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(235, 6);
             // 
-            // gestiónDeCategoríasToolStripMenuItem
+            // MnuGestionCategorias
             // 
-            this.gestiónDeCategoríasToolStripMenuItem.Name = "gestiónDeCategoríasToolStripMenuItem";
-            this.gestiónDeCategoríasToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
-            this.gestiónDeCategoríasToolStripMenuItem.Text = "Gestión de Categorías";
+            this.MnuGestionCategorias.Name = "MnuGestionCategorias";
+            this.MnuGestionCategorias.Size = new System.Drawing.Size(238, 26);
+            this.MnuGestionCategorias.Text = "Gestión de Categorías";
             // 
             // toolStripSeparator3
             // 
@@ -131,8 +134,10 @@
             // entradasYSalidasDeInventarioToolStripMenuItem
             // 
             this.entradasYSalidasDeInventarioToolStripMenuItem.Name = "entradasYSalidasDeInventarioToolStripMenuItem";
-            this.entradasYSalidasDeInventarioToolStripMenuItem.Size = new System.Drawing.Size(302, 26);
+            this.entradasYSalidasDeInventarioToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.entradasYSalidasDeInventarioToolStripMenuItem.Size = new System.Drawing.Size(357, 26);
             this.entradasYSalidasDeInventarioToolStripMenuItem.Text = "Entradas y Salidas de Inventario";
+            this.entradasYSalidasDeInventarioToolStripMenuItem.Click += new System.EventHandler(this.entradasYSalidasDeInventarioToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -226,11 +231,27 @@
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 457);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.LblUsuario});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 448);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(790, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(790, 31);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(62, 25);
+            this.toolStripStatusLabel1.Text = "Usuario:";
+            // 
+            // LblUsuario
+            // 
+            this.LblUsuario.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblUsuario.Name = "LblUsuario";
+            this.LblUsuario.Size = new System.Drawing.Size(25, 25);
+            this.LblUsuario.Text = "U";
             // 
             // FrmPrincipal
             // 
@@ -248,6 +269,8 @@
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,11 +284,11 @@
         private System.Windows.Forms.ToolStripMenuItem pROCESOSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gALERIADEREPORTESToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aCERCADEToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gestiónDeUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MnuGestionUsuarios;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem gestiónDeProductosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MnuGestionProductos;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem gestiónDeCategoríasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MnuGestionCategorias;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entradasYSalidasDeInventarioToolStripMenuItem;
@@ -280,5 +303,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem inventarioABCToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel LblUsuario;
     }
 }

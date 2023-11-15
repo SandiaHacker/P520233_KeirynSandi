@@ -19,6 +19,33 @@ namespace P520233_KeirynSandi.Formularios
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            LblUsuario.Text = Globales.ObjetosGlobales.MiUsuarioGlobal.Nombre + "(" + Globales.ObjetosGlobales.MiUsuarioGlobal.MiUsuarioRol.Rol + ")";
+
+            //AHORA SE DEBE AJUSTAR LOS PERMISOS DE MENÚ PARA QUE SE MUETREN O NO, DEPENDIENDO
+            //DEL TIPO DE ROLL
+
+            switch (Globales.ObjetosGlobales.MiUsuarioGlobal.MiUsuarioRol.UsuarioRolID)
+            {
+
+                //ADMIN
+                case 1:
+                    //COMO ADMIN TIENE A TODO, NO ES NECESARIO OCULTAR OPCIONES
+
+                    break;
+
+
+                //EMPLEADO
+                case 2:
+                    //OCULTAN LOS MENÚS CORRESPONDIENTES    
+                    MnuGestionUsuarios.Enabled = false;
+                    MnuGestionProductos.Enabled = false;
+                    MnuGestionCategorias.Enabled = false;  
+                    break;
+                default:
+                    break;
+            }
+
+
 
         }
 
@@ -52,6 +79,15 @@ namespace P520233_KeirynSandi.Formularios
         private void FrmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void entradasYSalidasDeInventarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globales.ObjetosGlobales.MiFormularioMovimientos.Visible)
+            {
+                Globales.ObjetosGlobales.MiFormularioMovimientos = new FrmMovimientosInventario ();
+                Globales.ObjetosGlobales.MiFormularioMovimientos.Show();
+            }
         }
     }
 }

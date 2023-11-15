@@ -6,6 +6,8 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Logica.Tools;
+
 namespace Logica.Models
 {
     public class Usuario
@@ -247,5 +249,34 @@ namespace Logica.Models
             return R;
             
         }
+
+        public int ValidarIngreso(string pUsuario, string pContrasennia)
+        {
+            int R = 0;
+
+            Conexion MyCnn = new Conexion();
+
+            Crypto MyEncriptador = new Crypto();
+
+            string PasswordEncriptado = MyEncriptador.EncriptarEnUnSentido(pContrasennia);
+
+            MyCnn.ListaDeParametros.Add(new SqlParameter("@Usuario", pUsuario));
+            MyCnn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", PasswordEncriptado));
+
+            DataTable resultado = MyCnn.EjecutarSELECT("SPUsuariosValidarIngreso");
+
+            if (resultado != null && resultado.Rows.Count > 0)
+            {
+                DataRow MiFila = resultado.Rows[0];
+
+                R = Convert.ToInt32(MiFila["UsuarioID"]);
+
+            }
+
+            return R;
+        }
+
+
+
       }
     }
