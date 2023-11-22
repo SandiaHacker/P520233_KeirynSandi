@@ -62,7 +62,23 @@ namespace Logica.Models
 
         List<MovimientoDetalle> Detalles { get; set; }
 
-        
+        public DataTable AsignarEsquemaDelDetalle()
+        {
+            DataTable R = new DataTable();
+
+            Conexion MyCnn = new Conexion();
+
+            //QUEREMOS CARGAR EL ESQUEMA DEL DATATBLE, NO LOS DATOS
+            R = MyCnn.EjecutarSELECT("SPMovimientoCargarDetalle", true);
+
+
+            //PARA EVITAR EL IDENTIFY (1,1) QUE ESTÁ ORIGINALMENTE EN LA TABLA
+            //ME GENERA NUMEROS UNICOS QUE IMPIDAN REPETIR REGISTROS
+            R.PrimaryKey = null;
+
+
+            return R;
+        }
 
 
 
