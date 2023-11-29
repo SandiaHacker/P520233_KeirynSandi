@@ -68,7 +68,7 @@ namespace P520233_KeirynSandi.Formularios
                         NuevaFila["SubTotal"] = Convert.ToDecimal(item["SubTotal"]);
 
                         //NECESITO HACER EL CALCULO DEL TOTAL DEL IMPUESTO, NO BASTA SOLO EL % DEL IVA
-                        decimal TasaIVA = Convert.ToDecimal(item["TasaImpuestos"]);
+                        decimal TasaIVA = Convert.ToDecimal(item["TasaImpuesto"]);
                         decimal SubTotal = Convert.ToDecimal(item["SubTotal"]);
                         decimal TotalIVA = SubTotal * TasaIVA;
                         NuevaFila["TotalIVA"] = TotalIVA;
@@ -97,20 +97,27 @@ namespace P520233_KeirynSandi.Formularios
 
         private bool Validar()
         {
-            bool R = false;
+           bool R = false;
 
-            if (DgvLista.SelectedRows.Count == 1 && NtxtCantidad.Value > 0)
-            {
-                MessageBox.Show("Debe seleccionar un producto de la lista", "ERROR de validación", MessageBoxButtons.OK);
-                return false;
-            }
-            if (NtxtCantidad.Value <= 0)
-            {
-                MessageBox.Show("La cantidad no puede ser cero o negativa", "ERROR de validacion", MessageBoxButtons.OK);
-                return false;
-            }  
-
-            return R;
+if (DgvLista.SelectedRows.Count == 1 && NtxtCantidad.Value > 0)
+{
+    R = true;
+}
+else
+{
+    //si no se seleccionó algo en la lista 
+    if (DgvLista.SelectedRows.Count == 0)
+    {
+        MessageBox.Show("Debe seleccionar un producto de la lista", "Error de validación", MessageBoxButtons.OK);
+        return false;
+    }
+    if (NtxtCantidad.Value <= 0)
+    {
+        MessageBox.Show("La cantidad no puede ser cero o negativa", "Error de validación", MessageBoxButtons.OK);
+        return false;
+    }
+}
+return R;
         }
 
         private void FrmMovimientosInventarioDetalleProducto_Load(object sender, EventArgs e)

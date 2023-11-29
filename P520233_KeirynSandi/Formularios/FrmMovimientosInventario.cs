@@ -51,11 +51,11 @@ namespace P520233_KeirynSandi.Formularios
 
         private void CargarComboMovimiento()
         {
-            Logica.Models.UsuarioRol MiRol = new Logica.Models.UsuarioRol();
+            Logica.Models.MovimientoTipo MiTipo = new Logica.Models.MovimientoTipo();
 
             DataTable dt = new DataTable();
 
-            dt = MiRol.Listar();
+            dt = MiTipo.Listar();
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -111,9 +111,139 @@ namespace P520233_KeirynSandi.Formularios
 
             if (resp == DialogResult.OK) 
             {
-                //TODO AGREGAR LA NUEVA LINEA DE DETALLE
+                DgvListaDetalle.DataSource = DtListaDetalleProductos;
+
+                Totalizar();
+
+
+            }
+
+
+
+        }
+
+        private void Totalizar()
+        {
+
+            decimal Costo = 0;
+            decimal Subtotal = 0;
+            decimal TotalIVA = 0;
+            decimal Total = 0;
+
+            if (DtListaDetalleProductos != null && DtListaDetalleProductos.Rows.Count > 0)
+            {
+                foreach (DataRow item in DtListaDetalleProductos.Rows)
+                {
+
+                    decimal Cantidad = Convert.ToDecimal(item["CantidadMovimiento"]);
+
+                    Costo += Convert.ToDecimal(item["Costo"]) * Cantidad;
+
+                    Subtotal += Convert.ToDecimal(item["Subtotal"]) * Cantidad;
+
+                    TotalIVA += Convert.ToDecimal(item["TotalIVA"]) * Cantidad;
+
+                    Total += Subtotal + TotalIVA;
+                }
+            }
+
+            LblTotalCosto.Text = string.Format("{0:C2}", Costo);
+            LblTotalSubTotal.Text = string.Format("{0:C2}", Subtotal);
+            LblTotalImpuestos.Text = string.Format("{0:C2}", TotalIVA);
+            LblTotalGranTotal.Text = string.Format("{0:C2}", Total);
+
+            
+        }
+
+        private void BtnAplicar_Click(object sender, EventArgs e)
+        {
+            if (ValidarMovimiento())
+            {
+                MiMovimientoLocal.Fecha = DtpFecha.Value.Date;
+                MiMovimientoLocal.Anotaciones = TxtAnotaciones.Text.Trim();
+
+                MiMovimientoLocal.MiTipo.MovimientoTipoID = Convert.ToInt32(CboxTipo.SelectedValue);
+
+                MiMovimientoLocal.MiUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal;
+
+
+                TrasladarDetalles();
+
+                if (MiMovimientoLocal.Agregar()) ;
+                {
+                    MessageBox.Show("EL MOVIMEINTO SE HA AGREGADO CORRECTAMENTE", ":D", MessageBoxButtons.OK);
+
+                    //TODO generar un reporte visual en CR
+
+                }
+
             }
 
         }
+
+        private void TrasladarDetalles()
+        {
+
+            foreach (DataRow item in DtListaDetalleProductos.Rows)
+            {
+
+                //EN CADA ITERACION CREAMOS UN NUEVO OBJETO DE "MOVIIENTODETALLE" QUE LUEGO
+                //SERA AGREGADO A LA LISTA DE DETALLES DEL OBJETO LOCAL 
+
+                Logica.Models.MovimientoDetalle NuevoDetalle = new Logica.Models.MovimientoDetalle();
+
+                NuevoDetalle.CantidadMovimiento = Convert.ToDecimal(item["CantidadMovimiento"]);
+                NuevoDetalle.Costo = Convert.ToDecimal(item["Costo"]);
+                NuevoDetalle.PrecioUnitario = Convert.ToDecimal(item["PrecioUnitario"]);
+                NuevoDetalle.SubTotal = Convert.ToDecimal(item["SubTotal"]);
+                NuevoDetalle.TotalIVA = Convert.ToDecimal(item["TotalIVA"]);
+
+                //ATRIBUTO COMPUESTO SIMPLE
+
+                NuevoDetalle.MiProducto.ProductoID = Convert.ToInt32(item["ProductoID"]);
+
+                //AGREGAR EL DETALLE NUEVO A LA LISTA DEL OBJETO LOCAL
+
+                MiMovimientoLocal.Detalles.Add(NuevoDetalle);
+
+            }
+
+        }
+
+
+        private bool ValidarMovimiento()
+        {
+            bool R = false;
+            if (DtpFecha.Value.Date <= DateTime.Now.Date &&
+                CboxTipo.SelectedIndex > -1 &&
+                DtListaDetalleProductos.Rows.Count > 0)
+            {
+                R = true;
+            }
+            else
+            {
+                if (DtpFecha.Value.Date > DateTime.Now.Date)
+                {
+                    MessageBox.Show("La fecha del movimiento no puede " +
+                        "ser superior a la fecha actual", "Error de Validación",
+                        MessageBoxButtons.OK);
+                    return false;
+                }
+                if (CboxTipo.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Debe seleccionar un tipo de movimiento",
+                        "Error de Validación", MessageBoxButtons.OK);
+                    return false;
+                }
+                if (DtListaDetalleProductos == null || DtListaDetalleProductos.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se puede procesar un movimiento sin detalles",
+                        "Error de Validación", MessageBoxButtons.OK);
+                    return false;
+                }
+            }
+            return R;
+        }
+
     }
 }
