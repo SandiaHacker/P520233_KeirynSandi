@@ -12,11 +12,11 @@ namespace P520233_KeirynSandi.Formularios
 {
     public partial class FrmMovimientosInventario : Form
     {
-       public Logica.Models.Movimiento MiMovimientoLocal {  get; set; }
+        public Logica.Models.Movimiento MiMovimientoLocal { get; set; }
 
-       public DataTable DtListaDetalleProductos { get; set; }
+        public DataTable DtListaDetalleProductos { get; set; }
 
-       
+
 
         public FrmMovimientosInventario()
         {
@@ -94,7 +94,7 @@ namespace P520233_KeirynSandi.Formularios
             LblTotalImpuestos.Text = "0";
             LblTotalSubTotal.Text = "0";
 
-        }     
+        }
 
 
 
@@ -109,7 +109,7 @@ namespace P520233_KeirynSandi.Formularios
 
             DialogResult resp = FormDetalleProducto.ShowDialog();
 
-            if (resp == DialogResult.OK) 
+            if (resp == DialogResult.OK)
             {
                 DgvListaDetalle.DataSource = DtListaDetalleProductos;
 
@@ -152,32 +152,55 @@ namespace P520233_KeirynSandi.Formularios
             LblTotalImpuestos.Text = string.Format("{0:C2}", TotalIVA);
             LblTotalGranTotal.Text = string.Format("{0:C2}", Total);
 
-            
+
         }
 
         private void BtnAplicar_Click(object sender, EventArgs e)
         {
             if (ValidarMovimiento())
             {
-                MiMovimientoLocal.Fecha = DtpFecha.Value.Date;
-                MiMovimientoLocal.Anotaciones = TxtAnotaciones.Text.Trim();
+                DialogResult respuesta = MessageBox.Show("Desea Continuar?", "???", MessageBoxButtons.YesNo);
 
-                MiMovimientoLocal.MiTipo.MovimientoTipoID = Convert.ToInt32(CboxTipo.SelectedValue);
-
-                MiMovimientoLocal.MiUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal;
-
-
-                TrasladarDetalles();
-
-                if (MiMovimientoLocal.Agregar()) ;
+                if (respuesta == DialogResult.Yes)
                 {
-                    MessageBox.Show("EL MOVIMEINTO SE HA AGREGADO CORRECTAMENTE", ":D", MessageBoxButtons.OK);
+                    MiMovimientoLocal.Fecha = DtpFecha.Value.Date;
+                    MiMovimientoLocal.Anotaciones = TxtAnotaciones.Text.Trim();
 
-                    //TODO generar un reporte visual en CR
+                    MiMovimientoLocal.MiTipo.MovimientoTipoID = Convert.ToInt32(CboxTipo.SelectedValue);
+
+                    MiMovimientoLocal.MiUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal;
+
+
+                    TrasladarDetalles();
+
+                    if (MiMovimientoLocal.Agregar()) ;
+                    {
+                        MessageBox.Show("EL MOVIMEINTO SE HA AGREGADO CORRECTAMENTE", ":D", MessageBoxButtons.OK);
+
+                        //GENERAR REPORTE
+
+                        //1. CREAR UN OBJETO DE TIPO DOCUMENTO
+                        CrystalDecisions.CrystalReports.Engine.ReportDocument MiReporte = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+
+                        //2.Crear objeto del reporte que se quiere usar
+                        MiReporte = new Reportes.RptMovimiento();
+
+                        //3. LLAMAR A LA FUNCION QUE EXTRAE LOS DATOS DE LA BASE DE DATOS
+                        MiReporte = MiMovimientoLocal.Imprimir(MiReporte);
+
+                        //4.DIBUJAR EL REPORTE EN PANTALLA
+                        FrmVisualisadorDeReportes MiVisualizador = new FrmVisualisadorDeReportes();
+
+                        MiVisualizador.CrvVisualizador.ReportSource = MiReporte;
+
+                        MiVisualizador.Show();
+
+                        //TODO: LIMPIAR FORMULARIO
+                    }
 
                 }
-
             }
+           
 
         }
 

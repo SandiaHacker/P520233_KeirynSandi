@@ -19,11 +19,11 @@ namespace Logica.Models
         public decimal Utilidad { get; set; }
         public decimal SubTotal { get; set; }
         public decimal TasaImpuesto { get; set; }
-        public decimal PrecioUnitrio { get; set; }
+        public decimal PrecioUnitario { get; set; }
         public decimal CantidadStock { get; set; }
         public bool Activo { get; set; }
 
-        ProductoCategoria MiCategoria { get; set; }
+        public ProductoCategoria MiCategoria { get; set; }
 
         public Producto() 
         { 
@@ -35,12 +35,33 @@ namespace Logica.Models
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
+
+            //AHORA AGREGAMOS TODOS LOS PARAMETROS QUE SOLICITA EL SP DE AGREGARA
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@CodigoBarras", this.CodigoBarras));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@NombreProducto", this.NombreProducto));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Costo", this.Costo));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Utilidad", this.Utilidad));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@SubTotal", this.SubTotal));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@TasaImpuesto", this.TasaImpuesto));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@PrecioUnitario", this.PrecioUnitario));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@CantidadStock", this.CantidadStock));
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@ProductoCategoriaID", this.MiCategoria.ProductoCategoriaID));
+
+
+            int resultado = MiCnn.EjecutarDML("SPProductosAgregar");
+
+            if (resultado > 0) R = true;
+
+
             return R;
         }
         public bool Actualizar()
         {
             bool R = false;
-
+   
             return R;
         }
         public bool Eliminar()
@@ -49,21 +70,102 @@ namespace Logica.Models
 
             return R;
         }
-        public bool ConsultarPorID()
+        public Producto ConsultarPorID(int IdProducto)
         {
-            bool R = false;
+            Producto R = new Producto();
+
+            Conexion MyCnn = new Conexion();
+
+            MyCnn.ListaDeParametros.Add(new SqlParameter("@ID", IdProducto));
+
+            DataTable DatosProducto = new DataTable();
+
+            DatosProducto = MyCnn.EjecutarSELECT("SPProductoConsultarPorID");
+
+            if (DatosProducto != null && DatosProducto.Rows.Count > 0)
+            {
+
+                DataRow MiFila = DatosProducto.Rows[0];
+
+                R.ProductoID = Convert.ToInt32(MiFila["ProductoID"]);
+                R.CodigoBarras = Convert.ToString(MiFila["CodigoBarras"]);
+                R.NombreProducto = Convert.ToString(MiFila["NombreProducto"]);
+                R.Costo = Convert.ToDecimal(MiFila["Costo"]);
+                R.Utilidad = Convert.ToDecimal(MiFila["Utilidad"]);
+                R.SubTotal = Convert.ToDecimal(MiFila["SubTotal"]);
+                R.TasaImpuesto = Convert.ToDecimal(MiFila["TasaImpuesto"]);
+                R.PrecioUnitario = Convert.ToDecimal(MiFila["PrecioUnitario"]);
+                R.CantidadStock = Convert.ToDecimal(MiFila["CantidadStock"]);
+                R.Activo = Convert.ToBoolean(MiFila["Activo"]);
+
+                R.MiCategoria.ProductoCategoriaID = Convert.ToInt32(MiFila["ProductoCategoriaID"]);
+                R.MiCategoria.ProductoCategoriaDescripcion = Convert.ToString(MiFila["ProductoCategoriaDescripcion"]);
+
+
+            }
+
+
 
             return R;
         }
 
-        public bool ConsultarPorCodigoDeBarras(string CodigoBarras)
+
+        public bool ConsultarPorCodigoBarras(string pCodigoBarras)
         {
             bool R = false;
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@CodigoBarras", pCodigoBarras));
+
+
+            DataTable dt = new DataTable();
+            dt = MiCnn.EjecutarSELECT("SPProductosConsultarPorCodigoBarras");
+
+
+            if (dt != null && dt.Rows.Count > 0) R = true;
+
+
+            return R;
+
+        }
+
+
+        public DataTable ListarActivos(string pFiltro = "")
+        {
+            DataTable R = new DataTable();
+
+            //hay que hacer instancia de la clase conexion 
+
+            Conexion MiCnn = new Conexion();
+            //como el SP para listar requiere un parámetro, hay que agregarlo a la lista
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@VerActivos", true));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Filtro", pFiltro));
+
+            R = MiCnn.EjecutarSELECT("SPProductosSListar");
 
             return R;
         }
 
-        public DataTable Listar(bool VerActivos = true )
+        public DataTable ListarInactivos(string pFiltro = "")
+        {
+            DataTable R = new DataTable();
+
+            //hay que hacer instancia de la clase conexion 
+
+            Conexion MiCnn = new Conexion();
+            //como el SP para listar requiere un parámetro, hay que agregarlo a la lista
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@VerActivos", false));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Filtro", pFiltro));
+
+            R = MiCnn.EjecutarSELECT("SPProductosSListar");
+
+
+            return R;
+        }
+
+
+
+        public DataTable Listar(bool VerActivos = true ) //*
         {
             DataTable R = new DataTable();
 
@@ -83,11 +185,6 @@ namespace Logica.Models
 
             return R;
         }
-
-
-
-
-
 
 
     }

@@ -105,6 +105,7 @@
             this.MnuGestionProductos.Name = "MnuGestionProductos";
             this.MnuGestionProductos.Size = new System.Drawing.Size(238, 26);
             this.MnuGestionProductos.Text = "Gestión de Productos";
+            this.MnuGestionProductos.Click += new System.EventHandler(this.MnuGestionProductos_Click);
             // 
             // toolStripSeparator2
             // 
@@ -142,7 +143,7 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(299, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(354, 6);
             // 
             // gALERIADEREPORTESToolStripMenuItem
             // 

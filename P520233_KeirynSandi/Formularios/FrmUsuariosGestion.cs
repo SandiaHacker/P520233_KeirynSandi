@@ -60,7 +60,7 @@ namespace P520233_KeirynSandi.Formularios
         //TODAS LAS FUNCIONALIDADES ESPECIFICAS Y QUE SE PUEDAN REUTILLIZAR DEBEN 
         //SER ENCAPSULADAS
 
-        private void CargarListaUsuarios(bool VerActivos, string FiltroBusqueda = "")
+        private void CargarListaUsuarios(bool VerActivos, string FiltroBusqueda = "") 
         {
             Logica.Models.Usuario miusuario = new Logica.Models.Usuario();
 

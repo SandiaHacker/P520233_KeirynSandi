@@ -24,8 +24,8 @@ namespace P520233_KeirynSandi.Globales
         public static Formularios.FrmMovimientosInventario
             MiFormularioMovimientos = new Formularios.FrmMovimientosInventario();
 
+        public static Formularios.FrmGestionProductos MiFormularioDeGestionDeProductos = new Formularios.FrmGestionProductos();
 
-        
 
     }
 }

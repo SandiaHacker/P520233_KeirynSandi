@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Data.SqlClient;
+using CrystalDecisions.CrystalReports.Engine;
+
 
 namespace Logica.Models
 {
@@ -16,7 +18,8 @@ namespace Logica.Models
           MiTipo = new  MovimientoTipo();
           MiUsuario = new Usuario();
 
-          Detalles = new List<MovimientoDetalle>();  
+          Detalles = new List<MovimientoDetalle>();
+            
         }
 
         public int MovimientoID { get; set; }
@@ -38,7 +41,7 @@ namespace Logica.Models
             MyCnn.ListaDeParametros.Add(new SqlParameter("@TipoMovimiento", this.MiTipo.MovimientoTipoID));
             MyCnn.ListaDeParametros.Add(new SqlParameter("@UsuarioID ", this.MiUsuario.UsuarioID));
 
-            Object RetornoSPAgregar = MyCnn.EjecutarSELECTEscalar("SPMovimientosAgregarEncabezados");
+            Object RetornoSPAgregar = MyCnn.EjecutarSELECTEscalar("SPMovimientosAgregarEncabezado");
 
             int IDMovimientoRecienCreado;
 
@@ -46,6 +49,10 @@ namespace Logica.Models
             {
                 //ESPECIALIZADO
                 IDMovimientoRecienCreado = Convert.ToInt32(RetornoSPAgregar.ToString());
+
+                //ASIGNAMOS AL OBJETO EL ID GENERADO POR EL SP
+
+                this.MovimientoID = IDMovimientoRecienCreado;
 
                 foreach (MovimientoDetalle item in this.Detalles)
                 {
@@ -123,7 +130,31 @@ namespace Logica.Models
             return R;
         }
 
+        public ReportDocument Imprimir(ReportDocument document)
+        {
+            ReportDocument R = document;
 
+            //HACEMOS UN OBJETO TIPO CRYSTAL (LA CLASE QUE CREAMOS)
+
+            Tools.Crystal ObjCrystal = new Tools.Crystal(R);
+
+            DataTable datos = new DataTable();
+
+            Conexion MyCnn = new Conexion();
+
+            MyCnn.ListaDeParametros.Add(new SqlParameter("@ID", this.MovimientoID));
+
+            datos = MyCnn.EjecutarSELECT("SPMovimientoImprimir");
+
+            if (datos != null && datos.Rows.Count > 0)
+            {
+                ObjCrystal.Datos = datos;
+
+                R = ObjCrystal.GenerarReporte();
+            }
+
+            return R;
+        }
 
 
 

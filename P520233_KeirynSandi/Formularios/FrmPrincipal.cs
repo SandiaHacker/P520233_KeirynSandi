@@ -89,5 +89,16 @@ namespace P520233_KeirynSandi.Formularios
                 Globales.ObjetosGlobales.MiFormularioMovimientos.Show();
             }
         }
+
+        private void MnuGestionProductos_Click(object sender, EventArgs e)
+        {
+            if (!Globales.ObjetosGlobales.MiFormularioDeGestionDeUsuarios.Visible)
+            {
+                //HAGO UNA REINSTANCIA DEL OBJETO PARA ASEGURAR QUE INICIAMOS EN LIMPIO
+                Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos = new FrmGestionProductos();
+
+                Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos.Show();
+            }
+        }
     }
 }
